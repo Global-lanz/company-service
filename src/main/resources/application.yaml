@@ -1,22 +1,9 @@
 spring:
   application:
-    name:
-      company-service
-  datasource:
-    url: jdbc:postgresql://localhost:5432/sm-company
-    username: postgres
-    password: postgres
-    driver-class-name: org.postgresql.Driver
-  messages:
-    basename: lang/messages
-
-
-#Eureka
-eureka:
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    serviceUrl:
-      defaultZone: http://localhost:8671/eureka
-server:
-  port: 8082
+    name: company-service
+  config:
+    import: optional:configserver:http://localhost:8180/
+  cloud:
+    config:
+      discovery:
+        enabled: true
