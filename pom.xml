@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>lanz.global</groupId>
 	<artifactId>company-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>company-service</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
@@ -60,10 +60,6 @@
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-config</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>com.auth0</groupId>
 			<artifactId>java-jwt</artifactId>
 			<version>4.4.0</version>
@@ -82,6 +78,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-kubernetes-client</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
