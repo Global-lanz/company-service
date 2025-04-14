@@ -8,5 +8,5 @@ public record CompanyResponse(
         @Schema(description = "The currency that the social media company uses by default") UUID companyId,
         @Schema(description = "The name of the social media company") String name,
         @Schema(description = "The name of the country where the social media company is located") String country,
-        @Schema(description = "The currency that the social media company uses by default") CurrencyResponse currency) {
+        @Schema(description = "The currency that the social media company uses by default") UUID currencyId) {
 }

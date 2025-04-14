@@ -8,9 +8,7 @@ import jakarta.validation.Valid;
 import lanz.global.companyservice.api.config.Rules;
 import lanz.global.companyservice.api.request.CreateCompanyRequest;
 import lanz.global.companyservice.api.response.CompanyResponse;
-import lanz.global.companyservice.api.response.CurrencyResponse;
 import lanz.global.companyservice.model.Company;
-import lanz.global.companyservice.model.Currency;
 import lanz.global.companyservice.service.CompanyService;
 import lanz.global.companyservice.util.converter.ServiceConverter;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -54,27 +51,5 @@ public class CompanyApi {
 
         return ResponseEntity.ok(serviceConverter.convert(company));
     }
-
-    @PermitAll
-    @GetMapping("/currency")
-    @Operation(summary = "Find currencies", description = "The endpoint for retrieving the list of currencies")
-    @ApiResponse(responseCode = "200")
-    public ResponseEntity<List<CurrencyResponse>> findCurrencies() {
-        List<Currency> currencies = companyService.findAllCurrencies();
-
-        return ResponseEntity.ok(serviceConverter.convertList(currencies));
-    }
-
-    @PermitAll
-    @GetMapping("/currency/{currencyId}")
-    @Operation(summary = "Find currency by ID", description = "The endpoint for retrieving the currency")
-    @ApiResponse(responseCode = "200")
-    @ApiResponse(responseCode = "404", description = "Currency not found")
-    public ResponseEntity<CurrencyResponse> findCurrencyById(@PathVariable("currencyId") UUID currencyId) {
-        Currency currency = companyService.findCurrencyById(currencyId);
-
-        return ResponseEntity.ok(serviceConverter.convert(currency));
-    }
-
 
 }
