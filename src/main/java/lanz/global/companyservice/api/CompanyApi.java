@@ -10,9 +10,8 @@ import lanz.global.companyservice.api.request.CreateCompanyRequest;
 import lanz.global.companyservice.api.response.CompanyResponse;
 import lanz.global.companyservice.model.Company;
 import lanz.global.companyservice.service.CompanyService;
-import lanz.global.companyservice.util.converter.ServiceConverter;
+import lanz.global.libraryservice.converter.component.ServiceConverter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +24,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/company")
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor
 public class CompanyApi {
 
     private final CompanyService companyService;
@@ -35,10 +34,10 @@ public class CompanyApi {
     @PostMapping
     @ApiResponse(responseCode = "200", description = "Company has been created")
     @ApiResponse(responseCode = "400", description = "Bad request")
-    public ResponseEntity<CompanyResponse> create(@Valid @RequestBody CreateCompanyRequest request) throws Exception {
+    public ResponseEntity<CompanyResponse> create(@Valid @RequestBody CreateCompanyRequest request) {
         Company createdCompany = companyService.createCompany(request);
 
-        return ResponseEntity.ok(serviceConverter.convert(createdCompany));
+        return ResponseEntity.ok(serviceConverter.convert(createdCompany, CompanyResponse.class));
     }
 
     @RolesAllowed(Rules.USER)
@@ -49,7 +48,7 @@ public class CompanyApi {
     public ResponseEntity<CompanyResponse> findCompanyById(@PathVariable("companyId") UUID companyId) {
         Company company = companyService.findCompanyById(companyId);
 
-        return ResponseEntity.ok(serviceConverter.convert(company));
+        return ResponseEntity.ok(serviceConverter.convert(company, CompanyResponse.class));
     }
 
 }

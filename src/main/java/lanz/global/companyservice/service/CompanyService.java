@@ -4,26 +4,23 @@ import lanz.global.companyservice.api.request.CreateCompanyRequest;
 import lanz.global.companyservice.exception.BadRequestException;
 import lanz.global.companyservice.model.Company;
 import lanz.global.companyservice.repository.CompanyRepository;
-import lanz.global.companyservice.util.converter.ServiceConverter;
+import lanz.global.libraryservice.converter.component.ServiceConverter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor
 public class CompanyService {
 
     private final CompanyRepository companyRepository;
     private final ServiceConverter serviceConverter;
 
-
     public Company createCompany(CreateCompanyRequest request) throws BadRequestException {
 //        Currency currency = findCurrencyById(request.currencyId());
 
-        Company company = serviceConverter.convert(request);
+        Company company = serviceConverter.convert(request, Company.class);
         company.setCurrencyId(null);
         return companyRepository.save(company);
     }
